@@ -1,0 +1,9 @@
+{
+	"port": 8001, 
+	"repositories": 
+	[{
+		"url": "https://github.com/rakeshviyak/SurpriseSkeleton-Backend.git", 
+		"path": "/root/SurpriseSkeleton-Backend",
+		"deploy": "echo deploying"
+	}]
+}
