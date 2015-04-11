@@ -4,6 +4,6 @@
 	[{
 		"url":"https://github.com/rakeshviyak/SurpriseSkeleton-Backend",
                 "path": "/root/SurpriseSkeleton-Backend",
-		"deploy": "echo deploying"
+		"deploy": "echo deployment"
 	}]
 }
