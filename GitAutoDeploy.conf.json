@@ -8,7 +8,7 @@
 	},
 	{
         	"url":"https://github.com/ArunKumarGK/UISkeletonEmber",
-        	"path": "/root/UISkeletonEmber",
+        	"path": "/root/UISkeleton",
         	"deploy": "echo deployment"
     	}]
 }
