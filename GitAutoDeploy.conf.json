@@ -3,7 +3,12 @@
 	"repositories": 
 	[{
 		"url":"https://github.com/rakeshviyak/SurpriseSkeleton-Backend",
-                "path": "/root/SurpriseSkeleton-Backend",
+        "path": "/root/SurpriseSkeleton-Backend",
 		"deploy": "echo deployment"
-	}]
+	},{
+        "url":"https://github.com/ArunKumarGK/UISkeletonEmber",
+        "path": "/root/UISkeletonEmber",
+        "deploy": "echo deployment"
+    }
+    ]
 }
