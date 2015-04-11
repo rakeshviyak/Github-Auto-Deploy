@@ -42,15 +42,18 @@ class GitAutoDeploy(BaseHTTPRequestHandler):
             return
 
         self.respond(204)
-
+        print '204 repsonse'
         urls = self.parseRequest()
+        print urls
         for url in urls:
             paths = self.getMatchingPaths(url)
+            print paths
             for path in paths:
                 self.fetch(path)
                 self.deploy(path)
 
     def parseRequest(self):
+        print 'parse request'
         length = int(self.headers.getheader('content-length'))
         body = self.rfile.read(length)
         payload = json.loads(body)
@@ -58,6 +61,7 @@ class GitAutoDeploy(BaseHTTPRequestHandler):
         return [payload['repository']['url']]
 
     def getMatchingPaths(self, repoUrl):
+        print 'get macthing paths'
         res = []
         config = self.getConfig()
         for repository in config['repositories']:
@@ -66,6 +70,7 @@ class GitAutoDeploy(BaseHTTPRequestHandler):
         return res
 
     def respond(self, code):
+        print 'respond' 
         self.send_response(code)
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
