@@ -14,23 +14,22 @@ class GitAutoDeploy(BaseHTTPRequestHandler):
     @classmethod
     def getConfig(myClass):
         if(myClass.config == None):
-            print 'get config -None'
+            #print 'get config -None'
             try:
                 configString = open(myClass.CONFIG_FILEPATH).read()
-                print 'config String'
-                print configString 
+                #print 'config String'
+                #print configString 
             except:
                 sys.exit('Could not load ' + myClass.CONFIG_FILEPATH + ' file')
 
             try:
                 myClass.config = json.loads(configString)
-                print 'my class config'
-                print myclass.config 
+                #print 'my class config' 
             except:
                 sys.exit(myClass.CONFIG_FILEPATH + ' file is not valid json')
 
             for repository in myClass.config['repositories']:
-                print 'inside url repo'
+                #print 'inside url repo'
                 if(not os.path.isdir(repository['path'])):
                     sys.exit('Directory ' + repository['path'] + ' not found')
                 # Check for a repository with a local or a remote GIT_WORK_DIR
@@ -85,7 +84,7 @@ class GitAutoDeploy(BaseHTTPRequestHandler):
         if(not self.quiet):
             print "\nPost push request received"
             print 'Updating ' + path
-        call(['cd "' + path + '" && git fetch'], shell=True)
+        call(['cd "' + path + '" && git pull'], shell=True)
 
     def deploy(self, path):
         config = self.getConfig()
