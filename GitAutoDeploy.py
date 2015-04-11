@@ -14,17 +14,22 @@ class GitAutoDeploy(BaseHTTPRequestHandler):
     @classmethod
     def getConfig(myClass):
         if(myClass.config == None):
+            #print 'get config -None'
             try:
                 configString = open(myClass.CONFIG_FILEPATH).read()
+                #print 'config String'
+                #print configString 
             except:
                 sys.exit('Could not load ' + myClass.CONFIG_FILEPATH + ' file')
 
             try:
                 myClass.config = json.loads(configString)
+                #print 'my class config' 
             except:
                 sys.exit(myClass.CONFIG_FILEPATH + ' file is not valid json')
 
             for repository in myClass.config['repositories']:
+                #print 'inside url repo'
                 if(not os.path.isdir(repository['path'])):
                     sys.exit('Directory ' + repository['path'] + ' not found')
                 # Check for a repository with a local or a remote GIT_WORK_DIR
@@ -42,15 +47,18 @@ class GitAutoDeploy(BaseHTTPRequestHandler):
             return
 
         self.respond(204)
-
+        print '204 repsonse'
         urls = self.parseRequest()
+        print urls
         for url in urls:
             paths = self.getMatchingPaths(url)
+            print paths
             for path in paths:
                 self.fetch(path)
                 self.deploy(path)
 
     def parseRequest(self):
+        print 'parse request'
         length = int(self.headers.getheader('content-length'))
         body = self.rfile.read(length)
         payload = json.loads(body)
@@ -58,6 +66,7 @@ class GitAutoDeploy(BaseHTTPRequestHandler):
         return [payload['repository']['url']]
 
     def getMatchingPaths(self, repoUrl):
+        print 'get macthing paths'
         res = []
         config = self.getConfig()
         for repository in config['repositories']:
@@ -66,6 +75,7 @@ class GitAutoDeploy(BaseHTTPRequestHandler):
         return res
 
     def respond(self, code):
+        print 'respond' 
         self.send_response(code)
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
